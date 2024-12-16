@@ -1,30 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Funkcija za generiranje checkboxova
-    function generirajCheckboxove() {
+    // Funkcija za popunjavanje padajućeg izbornika s kanalima
+    function popuniIzbornikKanala() {
         fetch('tv_raspored.json')
             .then(response => response.json())
             .then(data => {
-                const rasporedi = data.rasporedi; // Podaci iz JSON-a
-                const kanalListaDiv = document.getElementById('kanal-lista');
+                const rasporedi = data.rasporedi;
+                const kanalSelect = document.getElementById('kanal');
 
                 const sviKanali = new Set();
-                // Prolazak kroz sve datume i kanale
+                // Dohvati sve jedinstvene kanale iz JSON-a
                 Object.values(rasporedi).forEach(dan => {
                     Object.keys(dan).forEach(kanal => sviKanali.add(kanal));
                 });
 
-                // Generiranje checkboxova
+                // Popuni <select> element s kanalima
                 sviKanali.forEach(kanal => {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.value = kanal;
-                    checkbox.name = 'kanal';
-
-                    const label = document.createElement('label');
-                    label.appendChild(checkbox);
-                    label.appendChild(document.createTextNode(` ${kanal}`));
-
-                    kanalListaDiv.appendChild(label);
+                    const option = document.createElement('option');
+                    option.value = kanal;
+                    option.textContent = kanal;
+                    kanalSelect.appendChild(option);
                 });
             })
             .catch(error => console.error('Greška pri dohvaćanju JSON-a:', error));
@@ -33,12 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Funkcija za pretraživanje
     function pretrazi() {
         const datumUnos = document.getElementById('datum').value.trim();
+        const kanal = document.getElementById('kanal').value.trim(); // Dohvati odabrani kanal
         const pojam = document.getElementById('pojam').value.trim().toLowerCase();
 
-        // Dohvati sve označene kanale
-        const odabraniKanali = Array.from(document.querySelectorAll('input[name="kanal"]:checked'))
-                                   .map(checkbox => checkbox.value);
-
+        // Konvertiraj datum iz YYYY-MM-DD u DD.MM.YYYY
         let datum = '';
         if (datumUnos) {
             const [godina, mjesec, dan] = datumUnos.split('-');
@@ -51,13 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 let rezultati = [];
                 const rasporedi = data.rasporedi;
 
-                // Prolazak kroz sve datume
                 Object.keys(rasporedi).forEach(singleDatum => {
                     if (datum === '' || singleDatum === datum) {
                         const kanali = rasporedi[singleDatum];
 
                         Object.keys(kanali).forEach(singleKanal => {
-                            if (odabraniKanali.length === 0 || odabraniKanali.includes(singleKanal)) {
+                            if (kanal === '' || singleKanal === kanal) { // Filtriraj po kanalu
                                 kanali[singleKanal].forEach(emisija => {
                                     if (pojam === '' || emisija.emisija.toLowerCase().includes(pojam)) {
                                         rezultati.push(
@@ -76,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Greška pri dohvaćanju podataka:', error));
     }
 
-    // Poziv funkcija
-    generirajCheckboxove();
+    // Poziv funkcija prilikom učitavanja stranice
+    popuniIzbornikKanala();
     window.pretrazi = pretrazi;
 });
