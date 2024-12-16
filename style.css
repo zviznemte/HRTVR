@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-image: url('background.jpg'); /* Putanja do slike */
+      background-image: url('https://github.com/zviznemte/HRTVR/blob/main/background.jpg'); /* Putanja do slike */
       background-size: cover; /* Pokrije cijelu stranicu */
       background-repeat: no-repeat; /* Sprječava ponavljanje */
       background-attachment: fixed; /* Pozadina ostaje fiksna */
