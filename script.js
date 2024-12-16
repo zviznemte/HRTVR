@@ -1,34 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Dinamičko generiranje checkboxova za kanale
     function generirajCheckboxove() {
-        fetch('tv_raspored.json')
-            .then(response => response.json())
-            .then(data => {
-                const rasporedi = data.rasporedi;
-                const kanalListaDiv = document.getElementById('kanal-lista');
+    fetch('tv_raspored.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Učitani podaci iz JSON-a:", data); // Provjera podataka
+            const rasporedi = data.rasporedi;
+            const kanalListaDiv = document.getElementById('kanal-lista');
 
-                // Skup svih kanala iz JSON-a
-                const sviKanali = new Set();
-                Object.values(rasporedi).forEach(kanali => {
-                    Object.keys(kanali).forEach(kanal => sviKanali.add(kanal));
-                });
+            // Skup svih kanala
+            const sviKanali = new Set();
+            Object.values(rasporedi).forEach(kanali => {
+                Object.keys(kanali).forEach(kanal => sviKanali.add(kanal));
+            });
 
-                // Generiraj checkboxove
-                sviKanali.forEach(kanal => {
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.value = kanal;
-                    checkbox.name = 'kanal';
-                    
-                    const label = document.createElement('label');
-                    label.appendChild(checkbox);
-                    label.appendChild(document.createTextNode(` ${kanal}`));
-                    
-                    kanalListaDiv.appendChild(label);
-                });
-            })
-            .catch(error => console.error('Greška pri učitavanju kanala:', error));
-    }
+            // Generiranje checkboxova
+            sviKanali.forEach(kanal => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = kanal;
+                checkbox.name = 'kanal';
+
+                const label = document.createElement('label');
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(` ${kanal}`));
+
+                kanalListaDiv.appendChild(label);
+            });
+        })
+        .catch(error => {
+            console.error('Greška pri učitavanju kanala:', error);
+            alert("Greška pri učitavanju kanala. Provjerite JSON datoteku.");
+        });
+}
 
     // Funkcija za pretragu
     function pretrazi() {
