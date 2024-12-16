@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let datum = '';
         if (datumUnos) {
             const [godina, mjesec, dan] = datumUnos.split('-');
-            datum = `${dan}.${mjesec}.${godina}`;
+            datum = `${dan}.${mjesec}.${godina}.`;
         }
 
         fetch('tv_raspored.json')
