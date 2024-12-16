@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TV Raspored</title>
-  <style>
-    body { font-family: sans-serif; }
-    .result { margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; }
-  </style>
+  <!-- Povezivanje vanjskog CSS-a -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>TV Raspored</h1>
-  <label for="datum">Datum:</label>
-  <input type="date" id="datum">
-  <label for="kanal">Kanal:</label>
-  <select id="kanal">
-    <option value="">Svi kanali</option> <!-- Zadana opcija -->
-  </select>
-  <label for="pojam">Pojam:</label>
-  <input type="text" id="pojam" placeholder="npr. Dnevnik">
-  <button onclick="pretrazi()">Pretraži</button>
+  <div class="content">
+    <label for="datum">Datum:</label>
+    <input type="date" id="datum">
+    <label for="kanal">Kanal:</label>
+    <select id="kanal">
+      <option value="">Svi kanali</option> <!-- Zadana opcija -->
+    </select>
+    <label for="pojam">Pojam:</label>
+    <input type="text" id="pojam" placeholder="npr. Dnevnik">
+    <button onclick="pretrazi()">Pretraži</button>
+  </div>
 
   <div id="rezultati"></div>
 
+  <!-- Povezivanje JavaScript datoteke -->
   <script src="script.js"></script>
 </body>
 </html>
