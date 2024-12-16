@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
 function pretrazi() {
     const datumUnos = document.getElementById('datum').value.trim();
     const kanal = document.getElementById('kanal').value.trim().toLowerCase();
