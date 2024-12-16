@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Raspored</title>
+  <style>
+     body { font-family: sans-serif; }
+      .result { margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>TV Raspored</h1>
+    <label for="datum">Datum:</label>
+    <input type="text" id="datum" placeholder="npr. 13.12.2006">
+    <label for="kanal">Kanal:</label>
+    <input type="text" id="kanal" placeholder="npr. HRT 1">
+    <label for="pojam">Pojam:</label>
+    <input type="text" id="pojam" placeholder="npr. Dnevnik">
+    <button onclick="pretrazi()">Pretraži</button>
+
+  <div id="rezultati"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
