@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Konvertiraj datum u "1. 1. 2000."
     let datum = '';
     if (datumUnos) {
-        const [godina, mjesec, dan] = datumUnos.split('-');
+        const [dan, mjesec, godina] = datumUnos.split('-');
         datum = `${parseInt(dan)}. ${parseInt(mjesec)}. ${godina}.`;
     }
 
