@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 function pretrazi() {
-    const datumUnos = document.getElementById('datum').value.trim(); // Format: DD-MM-YYYY
+    const datumUnos = document.getElementById('datum').value.trim(); // Format: MM-DD-YYYY
     const kanal = document.getElementById('kanal').value.trim().toLowerCase();
     const pojam = document.getElementById('pojam').value.trim().toLowerCase();
 
-    // Konvertiraj datum iz DD-MM-YYYY u DD.MM.YYYY
+    // Konvertiraj datum iz MM-DD-YYYY u DD.MM.YYYY
     let datum = '';
     if (datumUnos) {
-        const [dan, mjesec, godina] = datumUnos.split('-');
+        const [mjesec, dan, godina] = datumUnos.split('-');
         datum = `${dan}.${mjesec}.${godina}`;
     }
 
