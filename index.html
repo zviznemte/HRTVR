@@ -5,22 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TV Raspored</title>
   <style>
-     body { font-family: sans-serif; }
-      .result { margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; }
+    body { font-family: sans-serif; }
+    .result { margin-bottom: 10px; border: 1px solid #ccc; padding: 10px; }
+    .kanal-lista { margin: 10px 0; }
+    .kanal-lista label { display: block; margin: 5px 0; }
   </style>
 </head>
 <body>
   <h1>TV Raspored</h1>
-    <label for="datum">Datum:</label>
-    <input type="date" id="datum">
-    <label for="kanal">Kanal:</label>
-    <input type="text" id="kanal" placeholder="npr. HRT 1">
-    <label for="pojam">Pojam:</label>
-    <input type="text" id="pojam" placeholder="npr. Dnevnik">
-    <button onclick="pretrazi()">Pretraži</button>
+  <label for="datum">Datum:</label>
+  <input type="date" id="datum">
+  <label for="pojam">Pojam:</label>
+  <input type="text" id="pojam" placeholder="npr. Dnevnik">
+  
+  <!-- Dinamički popis kanala -->
+  <div id="kanal-container">
+    <h3>Odaberite kanale:</h3>
+    <div id="kanal-lista" class="kanal-lista"></div>
+  </div>
+
+  <button onclick="pretrazi()">Pretraži</button>
 
   <div id="rezultati"></div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <script src="script
