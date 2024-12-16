@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Raspored</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('background.jpg.png'); /* Putanja do slike */
+      background-size: cover; /* Pokrije cijelu stranicu */
+      background-repeat: no-repeat; /* Sprječava ponavljanje */
+      background-attachment: fixed; /* Pozadina ostaje fiksna */
+      background-position: center; /* Slika centrirana */
+      color: #333; /* Boja teksta */
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Dodaje sjenu tekstu */
+    }
+
+    .content {
+      text-align: center;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.8); /* Lagana pozadina za sadržaj */
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <h1>TV RASPORED</h1>
+  <div class="content">
+    <p>Ovdje dolazi sadržaj vaše stranice o TV rasporedu.</p>
+  </div>
+</body>
+</html>
