@@ -1,60 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     function pretrazi() {
-        const datumUnos = document.getElementById('datum').value.trim(); // Format: YYYY-MM-DD
-        const kanal = document.getElementById('kanal').value.trim().toLowerCase();
-        const pojam = document.getElementById('pojam').value.trim().toLowerCase();
+    const datumUnos = document.getElementById('datum').value.trim(); // Vrijednost: YYYY-MM-DD
+    const kanal = document.getElementById('kanal').value.trim().toLowerCase();
+    const pojam = document.getElementById('pojam').value.trim().toLowerCase();
 
-        // Konvertiraj datum iz YYYY-MM-DD u DD.MM.YYYY
-        let datum = '';
-        if (datumUnos) {
-            const [godina, mjesec, dan] = datumUnos.split('-');
-            datum = `${dan}.${mjesec}.${godina}`;
-        }
+    let datum = '';
+    if (datumUnos) {
+        const [godina, mjesec, dan] = datumUnos.split('-'); // Razdvoji vrijednost iz inputa
+        datum = `${dan}.${mjesec}.${godina}`; // Konvertiraj u DD.MM.YYYY format
+    }
 
-        fetch('tv_raspored.json')
-            .then(response => response.json())
-            .then(data => {
-                let rezultati = [];
-                const rasporedi = data.rasporedi;
+    console.log("Traženi datum:", datum); // Za provjeru u konzoli
 
-                // Ako datum nije prazan, tražimo samo za taj datum
-                if (datum && rasporedi[datum]) {
-                    const kanali = rasporedi[datum];
-                    Object.keys(kanali).forEach(singleKanal => {
-                        kanali[singleKanal].forEach(emisija => {
-                            if ((pojam === '' || emisija.emisija.toLowerCase().includes(pojam)) &&
-                                (kanal === '' || singleKanal.toLowerCase().includes(kanal))) {
-                                rezultati.push(
-                                    `<div><strong>${datum} - ${singleKanal}</strong>: <strong>${emisija.vrijeme}</strong> - ${emisija.emisija}</div>`
-                                );
-                            }
-                        });
-                    });
-                } else {
-                    // Prolazimo kroz sve datume ako datum nije unesen ili nije pronađen
-                    Object.keys(rasporedi).forEach(singleDatum => {
-                        if (datum === '' || singleDatum.includes(datum)) {
-                            const kanali = rasporedi[singleDatum];
-                            Object.keys(kanali).forEach(singleKanal => {
-                                kanali[singleKanal].forEach(emisija => {
-                                    if ((pojam === '' || emisija.emisija.toLowerCase().includes(pojam)) &&
-                                        (kanal === '' || singleKanal.toLowerCase().includes(kanal))) {
-                                        rezultati.push(
-                                            `<div><strong>${singleDatum} - ${singleKanal}</strong>: <strong>${emisija.vrijeme}</strong> - ${emisija.emisija}</div>`
-                                        );
-                                    }
-                                });
-                            });
+    fetch('tv_raspored.json')
+        .then(response => response.json())
+        .then(data => {
+            let rezultati = [];
+            const rasporedi = data.rasporedi;
+
+            if (datum && rasporedi[datum]) {
+                const kanali = rasporedi[datum];
+                Object.keys(kanali).forEach(singleKanal => {
+                    kanali[singleKanal].forEach(emisija => {
+                        if ((pojam === '' || emisija.emisija.toLowerCase().includes(pojam)) &&
+                            (kanal === '' || singleKanal.toLowerCase().includes(kanal))) {
+                            rezultati.push(
+                                `<div><strong>${datum} - ${singleKanal}</strong>: <strong>${emisija.vrijeme}</strong> - ${emisija.emisija}</div>`
+                            );
                         }
                     });
-                }
+                });
+            } else {
+                rezultati.push('Nema rezultata za uneseni datum.');
+            }
 
-                const rezultatiDiv = document.getElementById('rezultati');
-                rezultatiDiv.innerHTML = rezultati.length > 0 ? rezultati.join('') : 'Nema rezultata.';
-            })
-            .catch(error => console.error('Greška pri učitavanju JSON-a:', error));
-    }
+            const rezultatiDiv = document.getElementById('rezultati');
+            rezultatiDiv.innerHTML = rezultati.length > 0 ? rezultati.join('') : 'Nema rezultata.';
+        })
+        .catch(error => console.error('Greška pri učitavanju JSON-a:', error));
+}
 
     window.pretrazi = pretrazi;
 });
