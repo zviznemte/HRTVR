@@ -6,16 +6,13 @@
   <title>TV Raspored</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('https://raw.githubusercontent.com/zviznemte/HRTVR/refs/heads/main/background.jpg'); /* Putanja do slike */
-      background-size: cover; /* Pokrije cijelu stranicu */
-      background-repeat: no-repeat; /* Sprječava ponavljanje */
-      background-attachment: fixed; /* Pozadina ostaje fiksna */
-      background-position: center; /* Slika centrirana */
-      color: #333; /* Boja teksta */
-    }
+    background-color: red; /* Provjera rada pozadine */
+    background-image: url('https://raw.githubusercontent.com/zviznemte/HRTVR/main/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
 
     h1 {
       text-align: center;
